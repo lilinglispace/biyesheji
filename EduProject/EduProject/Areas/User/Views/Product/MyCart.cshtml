@@ -1,0 +1,253 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="qc:admins" content="56207406376255516375" />
+    <title>购物车 - 美妆商城</title>
+    <script src="~/Content/User/js/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <style type="text/css">
+        .cart_header {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        .cart_header_box {
+            border-bottom: 2px solid #e5e5e5;
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+            padding-bottom: 15px;
+        }
+
+        .cart_header .logo_box {
+            float: left;
+        }
+
+        .cart_header .order_path {
+            float: right;
+            width: 377px;
+            height: 48px;
+        }
+
+        .cart_header .order_path_1 {
+            background: url(http://f0.jmstatic.com/static_cart/dist/20161021_2/images/order_path.png) no-repeat;
+            background-position: -2px -2px;
+        }
+
+        .cart_header .order_path_2 {
+            background: url(http://f0.jmstatic.com/static_cart/dist/20161021_2/images/order_path.png) no-repeat;
+            background-position: -2px -54px;
+        }
+
+        .cart_header .order_path_3 {
+            background: url(http://f0.jmstatic.com/static_cart/dist/20161021_2/images/order_path.png) no-repeat;
+            background-position: -2px -106px;
+        }
+
+        .cart_header .order_path_4 {
+            background: url(http://f0.jmstatic.com/static_cart/dist/20161021_2/images/order_path.png) no-repeat;
+            background-position: -2px -158px;
+        }
+
+        .cart_top {
+            position: relative;
+            height: 32px;
+            line-height: 32px;
+            color: #999999;
+            width: 960px;
+            margin: 0 auto;
+        }
+
+            .cart_top .user_box {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+                .cart_top .user_box .tips {
+                    font-style: normal;
+                    color: #dddddd;
+                    padding: 0 5px;
+                }
+
+                .cart_top .user_box .out, .cart_top .user_box .query {
+                    color: #999999;
+                }
+
+                .cart_top .user_box a:hover {
+                    text-decoration: none;
+                    color: #ed145b;
+                }
+    </style>
+
+    <div style="background: white;">
+
+        <div class="cart_top">
+            <div class="user_box" id="JS_user_box"><div>美妆商城欢迎您，<a href="/User/Account/login">登录</a><i class="tips">|</i><a href="/User/Account/Register">免费注册</a></div></div>
+            <div id="hiddenUserName" style="display:none">@ViewBag.userName</div>
+        </div>
+
+        <div class="cart_header_box">
+            <div class="cart_header clearfix">
+                <h1 class="logo_box">
+                    <a href="/User/Home/Index" id="home">
+                        <img src="~/Content/User/images/ShopCart/Logo.png" alt="美妆商城">
+                    </a>
+                </h1>
+                <div class="order_path order_path_1"></div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script type="text/javascript">
+        (function () {
+            var html = '';
+            var userName = $('#hiddenUserName').html();
+           
+            if (userName != "") {
+                html = '<div>欢迎您，<a href="#">' + userName + '</a>&nbsp;<a href="/User/Account/LogOut" class="out">[退出]</a><i class="tips">|</i><a href="#" class="query">订单查询</a></div>';
+                document.getElementById('JS_user_box').innerHTML = html;
+            }
+        })()
+    </script>
+
+    <div id="container" style="width: auto;">
+        <link rel="stylesheet" href="~/Content/User/css/jumei/show.css" />
+        @*<script src="~/Content/User/js/jquery-1.11.1.min.js"></script>*@
+        @*<script type="text/javascript" src="./website.min.js"></script>
+        <script type="text/javascript" src="./boot.js"></script>*@
+
+
+        <div class="content_show_wrapper">
+            <div class="cart_notification cart_error" style="">
+                <div class="message">
+                    <p></p>
+                </div>
+            </div>
+            <div id="group_show">
+
+                <div class="groups_wrapper">
+                    <table class="cart_group_item  cart_group_item_product">
+                        <thead>
+                            <tr>
+                                <th class="cart_overview">
+                                    <div class="cart_group_header">
+                                        <input style="display: none;" class="js_group_selector cart_group_selector" checked="checked" type="checkbox" />
+                                        <h2 style="padding-left: 20px;"> 美妆商城发货 </h2>
+                                    </div>
+                                </th>
+                                <th class="cart_price">价格（元）</th>
+                                <th class="cart_num">数量</th>
+                                <th class="cart_total">小计（元）</th>
+                                <th class="cart_option">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in @ViewBag.ModelData)
+                            {
+                                <tr class="cart_item" id=@item.ProductId product_id=@item.ProductId item_price=@item.Price category_v3_3="37" brand_id="679" product_type="product" vcb="false">
+                                <td valign="top">
+                                    <div class="cart_item_desc clearfix">
+                                        <input class="js_item_selector cart_item_selector" data-item-key="1080153_d161108p2561696zc" data-app="all" checked="checked" type="checkbox" />
+                                        <div class="cart_item_desc_wrapper">
+                                            <a class="cart_item_pic" href="/User/Product/Single?id=@item.ProductId" target="_blank"> <img src=@item.image alt=@item.PName /> <span class="sold_out_pic png"></span> </a>
+                                            <a class="cart_item_link" title=@item.PName href="/User/Product/Single?id=@item.ProductId" target="_blank">@item.PName</a>
+                                            <p class="sku_info"> 型号：<span class="cart_item_attribute">@item.mlNum&nbsp;</span>&nbsp; </p>
+                                            <p class="sku_info"> </p>
+                                            <div class="sale_info clearfix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="cart_item_price">
+                                        <p class="jumei_price">@item.Price</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="cart_item_num ">
+                                        <div class="item_quantity_editer clearfix" data-item-key="1080153_d161108p2561696zc">
+                                            <span class="decrease_one">-</span>
+                                            <input class="item_quantity" value=@item.Count type="text" id=@item.ProductId>
+                                            <span class="increase_one">+</span>
+                                        </div>
+                                        <div class="item_shortage_tip">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="cart_item_total">
+                                        <p class="item_total_price">
+                                            @{
+                                                 @: @(@item.Price*@item.Count)
+                                            }
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="cart_item_option">
+                                        <a class="icon_small delete_item png" data-item-key="1080153_d161108p2561696zc" href="javascript:void(0)" title="删除"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                               
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5"> 商品金额： <span class="group_total_price">&yen;@ViewBag.TotalPrice</span> </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="common_handler_anchor"></div>
+                <div class="common_handler common_handler_fixed">
+                    <div class="right_handler">
+                        共
+                        <span class="total_amount"> &nbsp;@ViewBag.TotalCount </span> &nbsp;件商品 &nbsp;&nbsp; 商品应付总额：
+                        <span class="total_price">&yen;@ViewBag.TotalPrice</span>
+                        <a id="go_to_order" class="btn" href="javascript:;">去结算</a>
+                    </div>
+                    <div class="left_handler">
+                        <label for="js_all_selector" class="cart_all_selector_wrapper"> <input id="js_all_selector" class="js_all_selector all_selector" type="checkbox" /> 全选 </label>
+                        <a class="go_back_shopping" href="">继续购物</a>
+                        <span class="seperate_line">|</span>
+                        <a class="clear_cart_all" href="">清空选中商品</a>
+
+                        <form id="form_to_order" action="" method="post" style="display: none;">
+                            <input name="items_key" type="hidden" />
+                        </form>
+                    </div>
+                </div>
+                <div class="content_footer clearfix">
+                    <div class="cart_timer_wrapper cart_out_of_time">
+                        <i class="icon_small png"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer_container">
+        <div id="footer_textarea">
+            <div class="footer_con" id="footer_copyright">
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/User/js/NumAdd.js"></script>
+    <script type="text/javascript">
+        
+        function Calcul(price, num)
+        {
+            var LittlePrice = price * parseFloat(num);
+            $('.item_total_price').html(LittlePrice.toFixed(2));
+        }
+       
+    </script>
+</body>
+</html>

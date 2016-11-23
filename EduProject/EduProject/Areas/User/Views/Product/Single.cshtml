@@ -1,0 +1,261 @@
+﻿
+@{
+     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@section Title{
+    美妆商城
+}
+
+@section Meta{
+
+
+<link href="~/Content/User/css/jumei/detail_other.css" rel="stylesheet" />
+<link href="~/Content/User/css/jumei/common.css" rel="stylesheet" />
+    }
+@section Logo{
+    <ul class="shopping_grid">
+        <a href="#"><li><span class="m_1">购&nbsp;物&nbsp;车</span>&nbsp;&nbsp;(0) &nbsp;<img src="~/Content/User/images/bag.png" alt="" /></li></a>
+        <a href="/User/Account/login"><li>登&nbsp;录</li></a>
+        <a href="/User/Account/Register"><li>注&nbsp;册</li></a>
+    </ul>
+    <div class="clearfix"> </div>
+}
+
+<input type="hidden" id="ab_dealcart" value="0" />
+<input type="hidden" id="local" value="0" />
+<input type="hidden" id="speciallocal" value="main-web.GlobalHideKey" />
+<input type="hidden" id="directwarehouse" value="1" />
+<input type="hidden" id="platform" value="0" />
+<div id="body" class="global_body">
+    <div class="detail_wrap">
+        <div class="deal_main clearfix">
+            <div class="deal_left" style="margin-left:-261px;">
+                <div class="deal_titles">
+                    <p class="long_title"> <strong> </strong> <span class="single_price"></span>@Model.Detail </p>
+                </div>
+                <!--倒计时start-->
+                <div class="preview_product btn_time">
+                    <!--倒计时end-->
+                    <div class="preview_product_id">
+                        <div class="detail_sold_out"></div>
+                        <img src="@Model.pic" class="ImageStd_1000" id="deal_img" />
+                    </div>
+                </div>
+                <!-- JiaThis Button BEGIN -->
+                <div class="product_info">
+                    <div class="jiathis_style fr">
+                        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico_jiathis" target="_blank"  style="font: 12px/1.5 'Hiragino Sans GB','微软雅黑',tahoma,arial,sans-serif">分享到 &gt;</a>
+                    </div>
+                </div>
+                <!-- JiaThis Button END -->
+            </div>
+            <div class="deal_right">
+                <div class="r_first clearfix">
+                    <a href="http://search.jumei.com/?filter=0-0-0-0-11-1&amp;search=谜尚（Missha）&amp;from=home_deal_top_brandlogo_null_null" target="_blank" rel="nofollow">
+                        <img src="http://p0.jmstatic.com/brand/logo_180/12006.jpg" class="logo_brand" alt="logo_brand" onerror="this.style.display='none'" />
+                    </a>
+                    <div class="flag_box_main clearfix fr">
+                        <img src="http://p1.global.jmstatic.com/banner/area/000/000/021_flag.jpg?v2" class="p_img_lg fl" alt="flag" onerror="this.parentNode.style.display='none'" />
+                        <ul class="fl" >
+                            <li class="area_code_b">韩国</li>
+                            <li class="deal_en">Korea</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="r_second"> 
+                    <ul class="price_module clearfix">
+                        <!--非组合start-->
+                        <li class="jumei_price"><em class="jp_cur">&yen;</em>@Model.Price</li>
+                        <li class="sh_mark sh_mark_price" id="sh_mark_price">
+                            <span class="rmb_tax"></span>
+                            <div class="mark_layer" style="display:none;">
+                                <b class="caret_out"></b>
+                                <b class="caret_in"></b>
+                                <div class="mark_hover">
+                                </div>
+                            </div>
+                        </li>
+                        <!--非组合end-->
+                    </ul>
+                </div>
+                 <div class="clearfix">
+
+                 @*<div class="num fl">
+                   已购买人数
+                  <em>928</em>
+                 </div>*@
+                     <div class="mall_detail_common mall_product_num mar_t15 ">
+                         <span class="label" style="font: 12px/1.5 'Hiragino Sans GB','微软雅黑',tahoma,arial,sans-serif">数量</span>
+                         <div class="num_detail" id="num_detail">
+                             <em title="减少" class="number_reduce fl" id="num_rduce"></em>
+                             <input type="text" value="1" id="buy_number" class="buy_number fl" maxlength="2">
+                             <em title="增加" class="number_add fl" id="num_add"></em>
+                         </div>
+                     </div>
+                 <div class="comments fr"></div>
+                </div>  
+                <div class="r_third">
+                    <dl class="mail_policy clearfix">
+                        <dt class="fl">
+                            包邮政策：
+                        </dt>
+                        <dd class="retail_global_mail">
+                            满299元或2件包邮
+                        </dd>
+                    </dl>
+                    <dl class="mail_policy clearfix">
+                        <dt class="fl">
+                            服务政策：
+                        </dt>
+                        <dd class="global_mail">
+                            <span class="day"></span>7天拆封无理由退货
+                        </dd>
+                    </dl>
+                    @*<dl class="deal_sku clearfix">
+                        <dt><span class="r_third_spacing">型</span>号:</dt>
+                        <dt class="dt_relative">
+                            <div class="deal_sku_input">请选择型号</div>
+                            <i class="new_detail_btn"></i>
+                            <div class="warningtip">请选择型号</div>
+                            <ul class="sku_select" id="sku_select"></ul>
+                        </dt>
+                    </dl>*@
+                   
+                </div>
+                <div class="r_fourth">
+                    <!--按钮状态start-->
+                    <a href="javascript:;" class="detail_btn_fom btn_fom_add buy_local btnCart" id="cart_add"><span>加入购物车</span><i></i></a>
+                    <!--按钮状态end-->
+                </div>
+            </div>
+        </div>
+
+        <!-- 香港直邮添加 deal_prefer_direct -->
+        <div class="deal_prefer  clearfix" id="deal_prefer">
+            <!--预售start-->
+            <div class="list rightborder">
+                <div class="item">
+                    <div class="item_show item_show_0"></div>
+                    <div class="item_desp item_desp_0">
+                    </div>
+                </div>
+            </div>
+            <div class="list rightborder">
+                <div class="item">
+                    <div class="item_show item_show_1"></div>
+                    <div class="item_desp item_desp_1">
+                    </div>
+                </div>
+            </div>
+            <div class="list rightborder">
+                <div class="item">
+                    <div class="item_show item_show_2"></div>
+                    <div class="item_desp item_desp_2">
+                    </div>
+                </div>
+            </div>
+            <div class="list last">
+                <div class="item">
+                    <div class="item_show item_show_3"></div>
+                    <div class="item_desp item_desp_3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--推荐商品-->
+        <div class="deal_detail deal_recom" deal_baoyou="299" id="deal_recom" hid_shippingsystemid="2310" deal_category="retail_global"></div>
+        <div class="deal_detail">
+            <div class="deal_tab_nav" id="anchorbar">
+                <div class="inner">
+                    <ul class="clearfix fl">
+                        <li><a href="#spxx">商品信息</a></li>
+                        <li><a href="#spxq">商品详情</a></li>
+                    </ul>
+                    <div class="nav_fixed_pric fr">
+                        <span class="nav_fprice"> <strong class="jm_price"> &yen;?? </strong> </span>
+                        <span class="btn"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="content_nav_con content_book">
+
+            </div> -->
+
+            <div class="ptb_30">
+
+                <div id="spxx" class="content_nav_con  content_book">
+                    <div class="detail_content guts_box"></div>
+                    <div class="content_text">
+                        <div class="deal_con_content">
+                            <table border="0" cellpadding="0" cellspacing="0" style="font-family:arial;">
+                                <tbody>
+                                    <tr>
+                                        <td width="85" align="left"><b>商品名称：</b></td>
+                                        <td style="display:none" id="ProId">@ViewBag.Id</td>
+                                        <td width="500" id="pName"><span>@Model.PName</span></td>
+                                        <td rowspan="7" style="padding-right:0;">
+                                            <img src="http://p1.global.jmstatic.com/product/002/419/2419270_std/2419270_200_200.jpg" class="w200">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="85" align="left"><b>商品型号：</b></td>
+                                        <td>
+                                            <span style="margin-right:10px;">#21，15g*2(702020541)；</span>
+                                            <span style="margin-right:10px;">#23，15g*2(702021039)；</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><b>品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;牌：</b></td>
+                                        <td><span>谜尚（Missha）</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><b>分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类：</b></td>
+                                        <td><span>BB霜/CC霜</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><b>适用人群：</b></td>
+                                        <td><span>所有爱美的MM</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><b>保质期限：</b></td>
+                                        <td><span>3年（具体日期以收到实物为准）</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><b>原产国家：</b></td>
+                                        <td><span>韩国</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="spxq" class="content_nav_con">
+                    <div class="detail_content spxq_box"></div>
+                    <div class="content_text">
+                        <p>
+                            <img src="http://p12.jmstatic.com/html_editor/201604/14/14606128982813.jpg" alt="" />
+                            <img src="http://p12.jmstatic.com/html_editor/201610/19/14768419174997.jpg" alt="" />
+                            <img src="http://p12.jmstatic.com/html_editor/201605/10/14628601368091.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201605/10/14628601475477.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201603/14/1457948835424.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201603/14/14579488441759.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201603/14/14579488443112.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201603/14/14579488444313.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201604/14/1460612917501.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201605/10/14628601926342.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                            <img src="http://p12.jmstatic.com/html_editor/201603/14/14579488448096.jpg" alt="" style="font-size:12px;line-height:1.5;" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+
+
+    
